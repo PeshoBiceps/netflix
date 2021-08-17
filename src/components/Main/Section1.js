@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaAngleRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Section1 = () => {
   return (
@@ -12,8 +13,10 @@ const Section1 = () => {
           Ready to watch? Enter your email to create or restart your membership.
         </h3>
         <Register>
-          Get Started
-          <FaAngleRight />
+          <Link to="/register">
+            Get Started
+            <FaAngleRight />
+          </Link>
         </Register>
       </Wrap>
     </Container>
@@ -23,13 +26,13 @@ const Section1 = () => {
 export default Section1;
 
 const Container = styled.div`
+  min-height: 500px;
   height: 103vh;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
   background-image: linear-gradient(
-      
       rgba(0, 0, 0, 0.86),
       rgba(0, 0, 0, 0.26),
       rgba(0, 0, 0, 0.86)
@@ -73,20 +76,23 @@ const Wrap = styled.div`
     }
   }
 `;
-const Register = styled.button`
+const Register = styled.div`
   margin-top: 10px;
-  width: 186px;
-  height: 50px;
   background-color: #e50914;
-  color: #fff;
-  font-size: 20px;
-  border: none;
-  border-radius: 2px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 2px;
   transition: 0.1s ease-in-out;
   cursor: pointer;
+  a {
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 186px;
+    height: 50px;
+  }
   :hover {
     background-color: #f40612;
   }

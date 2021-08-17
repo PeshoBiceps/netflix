@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom'
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
@@ -68,8 +69,10 @@ const Questions = () => {
             membership.
           </h1>
           <Register>
-            Get Started
-            <FaAngleRight />
+            <Link to="/register">
+              Get Started
+              <FaAngleRight />
+            </Link>
           </Register>
         </ButtonWrap>
       </Wrap>
@@ -163,20 +166,23 @@ const ButtonWrap = styled.div`
   }
 `;
 
-const Register = styled.button`
-  margin-bottom: 20px;
-  width: 186px;
-  height: 50px;
+const Register = styled.div`
+  margin-top: 10px;
   background-color: #e50914;
-  color: #fff;
-  font-size: 20px;
-  border: none;
-  border-radius: 2px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 2px;
   transition: 0.1s ease-in-out;
   cursor: pointer;
+  a {
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 186px;
+    height: 50px;
+  }
   :hover {
     background-color: #f40612;
   }

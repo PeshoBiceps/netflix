@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 const MovieBanner = () => {
   const API_KEY = "ab1e1be9f5d2dc6c172658f32e6bb35f";
@@ -12,31 +11,38 @@ const MovieBanner = () => {
   };
 
   useEffect(() => {
+    let mounted = true;
+
     const randomMovies = async () => {
       const res = await fetch(
         `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_networks=213`
       );
       const data = await res.json();
-      console.log(data.results);
 
       const random = await data.results[
         Math.floor(Math.random() * data.results.length - 1)
       ];
-      console.log(random);
-      setRandomMovie(random);
+      if (mounted) {
+        setRandomMovie(random);
+      }
     };
+
     randomMovies();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (
     <Container
       style={
-        randomMovie.backdrop_path === undefined
+        !randomMovie.backdrop_path
           ? {
-              background: ``,
+              backgroundImage: ``,
             }
           : {
-              background: `linear-gradient(180deg, transparent, #111),url("https://image.tmdb.org/t/p/original/${randomMovie?.backdrop_path}`,
+              backgroundImage: `linear-gradient(transparent,#000000),url("https://image.tmdb.org/t/p/original/${randomMovie?.backdrop_path}`,
             }
       }
     >
@@ -55,12 +61,10 @@ const MovieBanner = () => {
 export default MovieBanner;
 
 const Container = styled.div`
-  margin-top: -94px;
-  height: 680px;
-  background-position: center ;
+  margin-bottom: -110px;
+  height: 700px;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-position: center center;
 `;
 const Wrap = styled.div`
   margin-left: 30px;

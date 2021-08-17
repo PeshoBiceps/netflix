@@ -10,7 +10,7 @@ const Login = () => {
   return (
     <Container>
       {
-        user.userName &&
+        user.userEmail &&
         <Redirect to='/home' />
       }
       <Wrap>
@@ -23,8 +23,8 @@ const Login = () => {
 export default Login
 
 const Container = styled.div`
-  margin-top: -110px;
-  height: 113vh;
+  min-height: 700px;
+  height: 103vh;
   width: 100vw;
   display: flex;
   align-items: center;

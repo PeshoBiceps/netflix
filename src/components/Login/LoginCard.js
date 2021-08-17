@@ -1,20 +1,67 @@
+import { useRef } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { auth, provider } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { setActiveUser } from "../../features/user/userSlice";
 
 const LoginCard = () => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
-  const handleSignIn = () => {
-    auth.signInWithPopup(provider).then((result) => {
-      dispatch(setActiveUser({
-        userName: result.user.displayName,
-        userEmail: result.user.email,
-      }))
-    })
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    auth
+      .signInWithEmailAndPassword(
+        emailRef.current.value,
+        passwordRef.current.value
+      )
+      .then((result) => {
+        console.log(result);
+        dispatch(
+          setActiveUser({
+            userEmail: result.user.email,
+          })
+        );
+        localStorage.setItem("userEmail", JSON.stringify(result.user.email));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleSignInGuest = (e) => {
+    e.preventDefault();
+    dispatch(
+      setActiveUser({
+        userEmail: 'Guest@guest.com',
+      })
+    );
+    localStorage.setItem("userEmail", JSON.stringify('Guest@guest.com'));
+  }
+
+  const handleSignInWithGoogle = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        dispatch(
+          setActiveUser({
+            userName: result.user.displayName,
+            userEmail: result.user.email,
+          })
+        );
+        localStorage.setItem(
+          "userName",
+          JSON.stringify(result.user.displayName)
+        );
+        localStorage.setItem("userEmail", JSON.stringify(result.user.email));
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   return (
@@ -22,17 +69,22 @@ const LoginCard = () => {
       <Wrap>
         <h1>Sign In</h1>
         <Form>
-          <input type="text" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <SignIn>Sign In</SignIn>
+          <input ref={emailRef} type="text" placeholder="Email" required />
+          <input
+            ref={passwordRef}
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <SignIn onClick={handleSignIn}>Sign In</SignIn>
         </Form>
-        <Guest>Continue as guest</Guest>
-        <p style={{ cursor: 'pointer' }} onClick={handleSignIn}>
+        <Guest onClick={handleSignInGuest}>Continue as guest</Guest>
+        <p style={{ cursor: "pointer" }} onClick={handleSignInWithGoogle}>
           <FcGoogle />
           Login with Google
         </p>
         <p>
-          New to Netflix?<a href="/register">Sign up now.</a>
+          New to Netflix?<Link to="/register">Sign up now.</Link>
         </p>
       </Wrap>
     </Container>
@@ -95,6 +147,10 @@ const SignIn = styled.button`
   font-weight: 700;
   margin: 24px 0 12px;
   cursor: pointer;
+  transition: 0.1s ease-in-out;
+  :hover {
+    background-color: #f40612;
+  }
 `;
 const Guest = styled.button`
   height: 50px;

@@ -1,46 +1,54 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { auth } from "../../firebase";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { setUserLogOut } from "../../features/user/userSlice";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        dispatch(setUserLogOut());
-      })
-      .catch((err) => alert(err.message));
+  const [show, setShow] = useState(false);
+
+  const transitionNavbar = () => {
+    if (window.scrollY > 100) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
   };
 
+  useEffect(() => {
+    window.addEventListener("scroll", transitionNavbar);
+  }, []);
+
   return (
-    <Container>
+    <Container
+      style={
+        show
+          ? { backgroundColor: "#000000e8" }
+          : { backgroundColor: "transparent" }
+      }
+    >
       <Logo>
         <Link to="/">
           <img src="./images/logo.svg" alt="netflix-logo" />
         </Link>
       </Logo>
 
-      {user.userName === null ? (
+      {user.userEmail === null ? (
         <Login>
           <Link to="/login">Sign In</Link>
         </Login>
       ) : (
         <LoggedIn>
           <Avatar>
-            <span>Hello, {user.userName}</span>
-            <img
-              src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/1bdc9a33850498.56ba69ac2ba5b.png"
-              alt="avatar"
-            />
+            <span>{user.userName ? `Hello ${user.userName}` : ""}</span>
+            <Link to="/profile">
+              <img
+                src="https://pbs.twimg.com/profile_images/1240119990411550720/hBEe3tdn_400x400.png"
+                alt="avatar"
+              />
+            </Link>
           </Avatar>
-          <SignOut>
-            <span onClick={handleSignOut}>Log Out</span>
-          </SignOut>
         </LoggedIn>
       )}
     </Container>
@@ -50,7 +58,7 @@ const Navbar = () => {
 export default Navbar;
 
 const Container = styled.div`
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -58,6 +66,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 80px;
+  z-index: 9999;
+  transition: 0.2s ease-in;
 `;
 const Logo = styled.div`
   width: 210px;
@@ -69,61 +79,42 @@ const Logo = styled.div`
     width: 150px;
   }
 `;
-const Login = styled.button`
-  width: 86px;
-  height: 36px;
+const Login = styled.div`
   background-color: #e50914;
-  color: #fff;
-  border-radius: 3px;
-  padding: 10px;
+  display: flex;
+  border-radius: 2px;
+  transition: 0.1s ease-in-out;
+  cursor: pointer;
   margin-right: 16px;
-  font-weight: 400;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
   a {
+    font-size: 16px;
+    color: #fff;
     text-decoration: none;
-    &:visited {
-      color: #fff;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 86px;
+    height: 40px;
+  }
+  :hover {
+    background-color: #f40612;
   }
 `;
-
-const SignOut = styled.div`
-  background-color: #333;
-  position: absolute;
-  top: 60px;
-  right: 0;
-  width: 100px;
-  height: 50px;
-  border-radius: 4px;
-  display: none;
-  cursor: pointer;
-  a {
-    text-decoration: none;
-  }
-`;
-
 const LoggedIn = styled.div`
   position: relative;
   top: 0;
   right: 0;
-  &:hover {
-    ${SignOut} {
-      align-items: center;
-      display: flex;
-      justify-content: center;
-    }
-  }
 `;
 
 const Avatar = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 20px;
   img {
     max-width: 60px;
     height: 100%;
+    cursor: pointer;
   }
   span {
     padding-right: 8px;
