@@ -41,8 +41,6 @@ const Home = () => {
     fetchData();
   }, [dispatch]);
 
-  console.log(user);
-
   return (
     <Container>
       {user.userEmail === null && <Redirect to="/login" />}

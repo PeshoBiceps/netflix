@@ -7,7 +7,6 @@ import { auth } from "../../firebase";
 const Profile = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  console.log(user);
 
   const handleSignOut = () => {
     auth

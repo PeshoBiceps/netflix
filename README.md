@@ -9,7 +9,7 @@ It was created with React, Redux, Firebase, Axios, Styled Components. It uses Th
 ![example-site](https://raw.githubusercontent.com/PeshoBiceps/netflix/master/src/netflix2.jpg)
 
 
-[Click Here For Preview]()
+[Click Here For Preview](https://netflix-clone-peshow.web.app/)
 
 ## App Features
 - Register, Login with email and password
