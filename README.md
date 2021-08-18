@@ -12,10 +12,10 @@ It was created with React, Redux, Firebase, Axios, Styled Components. It uses Th
 [Click Here For Preview]()
 
 ## Available pages
-  /home
-  /register
-  /login
-  /profile
+-  /home
+-  /register
+-  /login
+-  /profile
 
 ## Tech Stack
 
