@@ -31,7 +31,7 @@ const Register = () => {
         localStorage.setItem("userEmail", JSON.stringify(result.user.email));
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       });
   };
 
