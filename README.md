@@ -8,11 +8,12 @@ It was created with React, Redux, Firebase, Axios, Styled Components. It uses Th
 
 ![example-site](https://raw.githubusercontent.com/PeshoBiceps/netflix/master/src/netflix2.jpg)
 
+
+[Click Here For Preview]()
+
 ## App Features
 - Register, Login with email and password
 - Login with Google
-
-[Click Here For Preview]()
 
 ## Available pages
 
