@@ -45,7 +45,7 @@ const Navbar = () => {
             <Link to="/profile">
               <img
                 src="https://pbs.twimg.com/profile_images/1240119990411550720/hBEe3tdn_400x400.png"
-                alt="avatar"
+                alt=""
               />
             </Link>
           </Avatar>
@@ -68,6 +68,9 @@ const Container = styled.div`
   height: 80px;
   z-index: 9999;
   transition: 0.2s ease-in;
+  @media(max-width:768px){
+    height: 66px;
+  }
 `;
 const Logo = styled.div`
   width: 210px;
@@ -76,7 +79,7 @@ const Logo = styled.div`
     height: 100%;
   }
   @media (max-width: 600px) {
-    width: 150px;
+    width: 120px;
   }
 `;
 const Login = styled.div`
@@ -101,9 +104,7 @@ const Login = styled.div`
   }
 `;
 const LoggedIn = styled.div`
-  position: relative;
-  top: 0;
-  right: 0;
+
 `;
 
 const Avatar = styled.div`
@@ -112,11 +113,17 @@ const Avatar = styled.div`
   align-items: center;
   margin-right: 20px;
   img {
-    max-width: 60px;
+    width: 60px;
     height: 100%;
     cursor: pointer;
   }
   span {
     padding-right: 8px;
   }
+  @media (max-width: 600px) {
+    img{
+      width: 42px;
+    }
+  }
+
 `;

@@ -167,7 +167,7 @@ const ButtonWrap = styled.div`
 `;
 
 const Register = styled.div`
-  margin-top: 10px;
+  margin:10px 0px;
   background-color: #e50914;
   display: flex;
   border-radius: 2px;
