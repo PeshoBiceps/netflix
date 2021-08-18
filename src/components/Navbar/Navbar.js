@@ -68,7 +68,7 @@ const Container = styled.div`
   height: 80px;
   z-index: 9999;
   transition: 0.2s ease-in;
-  @media(max-width:768px){
+  @media (max-width: 768px) {
     height: 66px;
   }
 `;
@@ -77,6 +77,10 @@ const Logo = styled.div`
   img {
     width: 100%;
     height: 100%;
+    cursor: pointer;
+    @media (max-width: 768px) {
+      cursor: none;
+    }
   }
   @media (max-width: 600px) {
     width: 120px;
@@ -87,8 +91,8 @@ const Login = styled.div`
   display: flex;
   border-radius: 2px;
   transition: 0.1s ease-in-out;
-  cursor: pointer;
   margin-right: 16px;
+
   a {
     font-size: 16px;
     color: #fff;
@@ -98,14 +102,16 @@ const Login = styled.div`
     justify-content: center;
     width: 86px;
     height: 40px;
+    cursor: pointer;
+    @media (max-width: 768px) {
+      cursor: none;
+    }
   }
   :hover {
     background-color: #f40612;
   }
 `;
-const LoggedIn = styled.div`
-
-`;
+const LoggedIn = styled.div``;
 
 const Avatar = styled.div`
   display: flex;
@@ -116,14 +122,16 @@ const Avatar = styled.div`
     width: 60px;
     height: 100%;
     cursor: pointer;
+    @media (max-width: 768px) {
+      cursor: none;
+    }
   }
   span {
     padding-right: 8px;
   }
   @media (max-width: 600px) {
-    img{
+    img {
       width: 42px;
     }
   }
-
 `;
