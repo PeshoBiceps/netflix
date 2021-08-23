@@ -24,7 +24,6 @@ It was created with React, Redux, Firebase, Axios, Styled Components. It uses Th
 
 ## Tech Stack
 
-- Webpack
 - Axios
 - React
 - Redux
